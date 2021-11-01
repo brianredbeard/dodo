@@ -46,9 +46,9 @@ def makeThing(n='Valvola', fn='ballDN15.stp', p='0:0:0', pos=None, Z=None):
     pos = position Vector
     Z = orientation Vector
   '''
-  if pos==None:
+  if pos is None:
     pos=FreeCAD.Vector(0,0,0)
-  if Z==None:
+  if Z is None:
     Z=FreeCAD.Vector(0,0,1)
   a=FreeCAD.ActiveDocument.addObject("Part::FeaturePython",n)
   AnyThing(a, name=n, fileName=fn, ports=p)

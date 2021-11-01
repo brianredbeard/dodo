@@ -153,7 +153,7 @@ def intersectionPlane(base=None,v=None,face=None):
     face (Face): the face that defines the plane to be intersect
   '''   
   # only for quick testing:
-  if base==v==face==None:
+  if (base is None or v is None or face is None):
     face = faces()[0]
     beam=beams()[0]
     base=beam.Placement.Base
@@ -178,7 +178,7 @@ def intersectionPlane(base=None,v=None,face=None):
 def isOrtho(e1=None,e2=None):
   '"True" if two Edges or Vectors or the normal of Faces are orthogonal (with a margin)'
   v=[]
-  if (e1==None or e2==None):
+  if (e1 is None or e2 is None):
     if len(faces())>1:
       e1,e2=faces()[:2]
     elif len(edges())>1:
@@ -196,7 +196,7 @@ def isOrtho(e1=None,e2=None):
 def isParallel(e1=None,e2=None):
   '"True" if two Edges or Vectors or the normal of Faces are parallel (with a margin)'
   v=[]
-  if (e1==None or e2==None):
+  if (e1 is None or e2 is None):
     if len(faces())>1:
       e1,e2=faces()[:2]
     elif len(edges())>1:
@@ -219,7 +219,7 @@ def beamAx(beam, vShapeRef=None):
     beam: the object (any)
     vShapeRef: the Shape's reference vector (defaults Z axis of Shape)
   '''
-  if vShapeRef==None:
+  if vShapeRef is None:
     vShapeRef=FreeCAD.Vector(0.0,0.0,1.0)
   return beam.Placement.Rotation.multVec(vShapeRef).normalize()
 
@@ -240,7 +240,7 @@ def bisect(w1=None,w2=None):
   Returns the bisect vector between vectors w1 and w2.
   If no argument is given the function takes the selected edges, if any.
   '''
-  if w1==w2==None and len(edges())>=2:
+  if (w1 is None or w2 is None) and len(edges())>=2:
     w1,w2=[(e.CenterOfMass-FreeCAD.Vector(0,0,0)).normalize() for e in edges()[:2]]
   if w1!=None and w2!=None:
     w1.normalize()
@@ -257,9 +257,9 @@ def ortho(w1=None,w2=None):
   Returns the orthogonal vector to vectors w1 and w2.
   If no argument is given the function takes the selected edges, if any.
   '''
-  if w1==w2==None and len(edges())>=2:
+  if (w1 is None or w2 is None) and len(edges())>=2:
     w1,w2=[e.tangentAt(0) for e in edges()[:2]]
-  if w1!=None and w2!=None:
+  if w1 is not None and w2 is not None:
     return w1.cross(w2).normalize()
 
 def vec2edge(point,direct):

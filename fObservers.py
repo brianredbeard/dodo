@@ -33,10 +33,10 @@ class frameItObserver(frameObserverPrototype):
       self.beam=self.edge=None
     def addSelection(self,doc,obj,sub,pnt):
       selex=FreeCADGui.Selection.getSelectionEx()
-      if self.beam==None and hasattr(selex[len(selex)-1].Object,'Height'):
+      if self.beam is None  and hasattr(selex[len(selex)-1].Object,'Height'):
         self.beam=selex[len(selex)-1].Object
         FreeCAD.Console.PrintMessage('Beam selected\n')
-      elif self.edge==None and selex[len(selex)-1].SubObjects[0].ShapeType=='Edge':
+      elif self.edge is None  and selex[len(selex)-1].SubObjects[0].ShapeType=='Edge':
         self.edge=selex[len(selex)-1].SubObjects[0]
         FreeCAD.Console.PrintMessage('Edge selected\n')
       if self.edge!=None and self.beam!=None:
@@ -51,7 +51,7 @@ class fillFrameObserver(frameObserverPrototype):
         super(fillFrameObserver,self).__init__('First select the base beam, then the edges')
         self.beam=None
     def addSelection(self,doc,obj,sub,pnt):
-        if self.beam==None and FreeCAD.getDocument(doc).getObject(obj).TypeId=='Part::FeaturePython':
+        if self.beam is None  and FreeCAD.getDocument(doc).getObject(obj).TypeId=='Part::FeaturePython':
           self.beam=FreeCAD.getDocument(doc).getObject(obj)
           FreeCAD.Console.PrintMessage('Beam type selected.\n')
         else:
@@ -66,7 +66,7 @@ class levelBeamObserver(frameObserverPrototype):
     def addSelection(self,doc,obj,sub,pnt):
       subObject=FreeCAD.getDocument(doc).getObject(obj).Shape.getElement(sub)
       if subObject.ShapeType=="Face":
-        if self.targetFace==None:
+        if self.targetFace is None :
           self.targetFace=subObject
           FreeCAD.Console.PrintMessage('Target face selected.\n')
         else:
@@ -84,7 +84,7 @@ class alignFlangeObserver(frameObserverPrototype):
     def addSelection(self,doc,obj,sub,pnt):
       subObject=FreeCAD.getDocument(doc).getObject(obj).Shape.getElement(sub)
       if subObject.ShapeType=="Face":
-        if self.faceBase==None:
+        if self.faceBase is None :
           self.faceBase=subObject
           FreeCAD.Console.PrintMessage('Target face selected.\n')
         else:
@@ -117,7 +117,7 @@ class stretchBeamObserver(frameObserverPrototype): #OBSOLETE: replaced with dial
       self.beam=None
     def addSelection(self,doc,obj,sub,pnt):
       Obj=FreeCAD.getDocument(doc).getObject(obj)
-      if self.beam==None and Obj.TypeId=='Part::FeaturePython' and hasattr(Obj,'Height'):
+      if self.beam is None  and Obj.TypeId=='Part::FeaturePython' and hasattr(Obj,'Height'):
         self.beam=Obj
         FreeCAD.Console.PrintMessage('Beam type selected.\n')
         from PySide.QtGui import QInputDialog as qid
@@ -137,7 +137,7 @@ class extendObserver(frameObserverPrototype): #OBSOLETE: replaced with dialog
       subLastSel=lastSel.Shape.getElement(sub)
       if lastSel.TypeId=='Part::FeaturePython' and hasattr(lastSel,"Height") and self.target!=None:
         fCmd.extendTheBeam(lastSel,self.target)
-      if self.target==None and subLastSel.ShapeType in ["Edge","Face","Vertex"]:
+      if self.target is None  and subLastSel.ShapeType in ["Edge","Face","Vertex"]:
         self.target=subLastSel
         FreeCAD.Console.PrintMessage('Target selected.\n')
 

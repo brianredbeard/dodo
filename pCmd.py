@@ -41,7 +41,7 @@ def shapeReferenceAxis(obj=None, axObj=None):
   If arguments are None axObj is the normal to one circular edge selected
   and obj is the object selected.
   '''
-  if obj==None and axObj==None:
+  if obj is None and axObj is None:
     selex=FreeCADGui.Selection.getSelectionEx()
     if len(selex)==1 and len(selex[0].SubObjects)>0:
       sub=selex[0].SubObjects[0]
@@ -107,7 +107,7 @@ def portsDir(o):
 def simpleSurfBend(path=None,profile=None):
   'select the centerline and the O.D. and let it sweep'
   curva=FreeCAD.activeDocument().addObject("Part::Feature","CurvaSemplice")
-  if path==None or profile==None:
+  if path is None or profile is None :
     curva.Shape=Part.makeSweepSurface(*fCmd.edges()[:2])
   elif path.ShapeType==profile.ShapeType=='Edge':
     curva.Shape=Part.makeSweepSurface(path,profile)
@@ -125,9 +125,9 @@ def makePipe(propList=[], pos=None, Z=None):
   Z (vector): orientation: default = 0,0,1
   Remember: property PRating must be defined afterwards
   '''
-  if pos==None:
+  if pos is None :
     pos=FreeCAD.Vector(0,0,0)
-  if Z==None:
+  if Z is None :
     Z=FreeCAD.Vector(0,0,1)
   a=FreeCAD.ActiveDocument.addObject("Part::FeaturePython","Tubo")
   if len(propList)==4:
@@ -203,9 +203,9 @@ def makeElbow(propList=[], pos=None, Z=None):
     Z (vector): orientation: default = 0,0,1
   Remember: property PRating must be defined afterwards
   '''
-  if pos==None:
+  if pos is None :
     pos=FreeCAD.Vector(0,0,0)
-  if Z==None:
+  if Z is None :
     Z=FreeCAD.Vector(0,0,1)
   a=FreeCAD.ActiveDocument.addObject("Part::FeaturePython","Curva")
   if len(propList)==5:
@@ -360,9 +360,9 @@ def makeFlange(propList=[], pos=None, Z=None):
     Z (vector): orientation: default = 0,0,1
   Remember: property PRating must be defined afterwards
   '''
-  if pos==None:
+  if pos is None :
     pos=FreeCAD.Vector(0,0,0)
-  if Z==None:
+  if Z is None :
     Z=FreeCAD.Vector(0,0,1)
   a=FreeCAD.ActiveDocument.addObject("Part::FeaturePython","Flangia")
   if len(propList)>=8:
@@ -436,9 +436,9 @@ def makeReduct(propList=[], pos=None, Z=None, conc=True):
     conc (bool): True for concentric or Flase for eccentric reduction
   Remember: property PRating must be defined afterwards
   '''
-  if pos==None:
+  if pos is None :
     pos=FreeCAD.Vector(0,0,0)
-  if Z==None:
+  if Z is None :
     Z=FreeCAD.Vector(0,0,1)
   a=FreeCAD.ActiveDocument.addObject("Part::FeaturePython","Riduz")
   propList.append(conc)
@@ -462,9 +462,9 @@ def makeUbolt(propList=[], pos=None, Z=None):
     Z (vector): orientation: default = 0,0,1
   Remember: property PRating must be defined afterwards
   '''
-  if pos==None:
+  if pos is None :
     pos=FreeCAD.Vector(0,0,0)
-  if Z==None:
+  if Z is None :
     Z=FreeCAD.Vector(0,0,1)
   a=FreeCAD.ActiveDocument.addObject("Part::FeaturePython","U-Bolt")
   if len(propList)==5:
@@ -507,9 +507,9 @@ def makeCap(propList=[], pos=None, Z=None):
   Z (vector): orientation: default = 0,0,1
   Remember: property PRating must be defined afterwards
   '''
-  if pos==None:
+  if pos is None :
     pos=FreeCAD.Vector(0,0,0)
-  if Z==None:
+  if Z is None :
     Z=FreeCAD.Vector(0,0,1)
   a=FreeCAD.ActiveDocument.addObject("Part::FeaturePython","Fondo")
   if len(propList)==3:
@@ -720,9 +720,9 @@ def rotateTheTubeAx(obj=None,vShapeRef=None, angle=45):
     vShapeRef: if not defined, the Z axis of the Shape
     angle: default=45 deg
   '''
-  if obj==None:
+  if obj is None :
     obj=FreeCADGui.Selection.getSelection()[0]
-  if vShapeRef==None:
+  if vShapeRef is None :
     vShapeRef=FreeCAD.Vector(0,0,1)
   rot=FreeCAD.Rotation(fCmd.beamAx(obj,vShapeRef),angle)
   obj.Placement.Rotation=rot.multiply(obj.Placement.Rotation)
@@ -988,7 +988,7 @@ def rotateTheElbowPort(curve=None, port=0, ang=45):
   rotateTheElbowPort(curve=None, port=0, ang=45)
    Rotates one curve around one of its circular edges.
   '''
-  if curve==None:
+  if curve is None :
     try:
       curve=FreeCADGui.Selection.getSelection()[0]
       if not isElbow(curve):
@@ -1032,9 +1032,9 @@ def makeValve(propList=[], pos=None, Z=None):
   pos (vector): position of insertion; default = 0,0,0
   Z (vector): orientation: default = 0,0,1
   '''
-  if pos==None:
+  if pos is None :
     pos=FreeCAD.Vector(0,0,0)
-  if Z==None:
+  if Z is None :
     Z=FreeCAD.Vector(0,0,1)
   a=FreeCAD.ActiveDocument.addObject("Part::FeaturePython","Valvola")
   if len(propList):

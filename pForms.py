@@ -251,7 +251,7 @@ class insertElbowForm(dodoDialogs.protoPypeForm):
         for prop in self.pipeDictList:
           if prop['PSize']==DN:
             BR=float(pq(prop['BendRadius']))
-        if BR==None:
+        if BR is None :
           BR=1.5*OD/2
         propList=[DN,OD,thk,ang,BR]
         break

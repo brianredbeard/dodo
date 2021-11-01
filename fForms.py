@@ -194,7 +194,7 @@ class translateForm(dodoDialogs.protoTypeDialog):
       elif base.ShapeType=='Face' and target.ShapeType=='Vertex':
         # disp=target.Point-fCmd.intersectionPlane(target.Point,base.normalAt(0,0),base)
         disp=P[1]-P[0]
-      if disp!=None:
+      if disp is not None:
         self.form.edit4.setText(str(disp.Length))
         self.form.edit5.setText('1')
         disp.normalize()
