@@ -42,7 +42,6 @@ class protoTypeDialog(object):
   def selectAction(self):
     'MUST be redefined in the child class'
     print('"selectAction" performed')
-    pass
   def mouseActionB1(self,CtrlAltShift):
     'MUST be redefined in the child class'
     pass
