@@ -181,8 +181,8 @@ static char * dodo1_xpm[] = {
       import dodoPM
       Msg("__dodoPMact__ \n")
       FreeCAD.Console.PrintMessage(FreeCAD.__dodoPMact__.objectName()+' \'s shortcut = '+FreeCAD.__dodoPMact__.shortcuts()[0].toString()+'\n\t****\n')
-    except:
-      FreeCAD.Console.PrintError('dodoPM not loaded \n')
+    except Exception:
+      FreeCAD.Console.PrintError('Error: Encountered exception when loading dodoPM\n')
 
   def Deactivated(self):
     del FreeCAD.__activePypeLine__
